@@ -234,7 +234,7 @@ impl Ctap2GetAssertionOptions {
     }
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone,  Serialize, Deserialize)]
 pub struct PackedAttestationStmt {
     #[serde(rename = "alg")]
     pub algorithm: Ctap2COSEAlgorithmIdentifier,
@@ -246,7 +246,7 @@ pub struct PackedAttestationStmt {
     pub certificates: Vec<ByteBuf>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone,  Serialize, Deserialize)]
 pub struct FidoU2fAttestationStmt {
     #[serde(rename = "alg")]
     pub algorithm: Ctap2COSEAlgorithmIdentifier,
@@ -258,7 +258,7 @@ pub struct FidoU2fAttestationStmt {
     pub certificates: Vec<ByteBuf>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone,  Serialize, Deserialize)]
 pub struct TpmAttestationStmt {
     #[serde(rename = "ver")]
     pub version: String,
@@ -279,7 +279,7 @@ pub struct TpmAttestationStmt {
     pub public_area: ByteBuf,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Ctap2AttestationStatement {
     PackedOrAndroid(PackedAttestationStmt),
@@ -362,7 +362,7 @@ impl From<&MakeCredentialRequest> for Ctap2MakeCredentialRequest {
     }
 }
 
-#[derive(Debug, Clone, DeserializeIndexed)]
+#[derive(Debug, Clone, SerializeIndexed, DeserializeIndexed)]
 #[serde_indexed(offset = 1)]
 pub struct Ctap2MakeCredentialResponse {
     pub format: String,
